@@ -6,6 +6,7 @@ import abi from './utils/WavePortal.json';
 const App = () => {
   // Just a state variable we use to store our user's public wallet.
   const [currentAccount, setCurrentAccount] = useState("");
+  const [mode, setMode] = useState("light");
 
   const contractAddress = "0x5738173d19120DD4d84326eC557678b037324FC7";
   const contractABI = abi.abi;
@@ -89,12 +90,18 @@ const App = () => {
     }
   }
 
+  const toggleMode = () => {
+    setMode((prev) => prev === "light" ? "dark": "light");
+  }
+
   // This runs our function when the page loads due to empty dependency array.
   useEffect(() => {
     checkIfWalletIsConnected();
   }, [])
-  
+
   return (
+    <div className={`${mode}`}>
+    <button onClick={toggleMode}>{mode=== "light" ? "dark mode" : "light mode"}</button>
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">
@@ -118,6 +125,7 @@ const App = () => {
           </button>
         )}
       </div>
+    </div>
     </div>
   );
 }
