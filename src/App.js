@@ -10,7 +10,7 @@ const App = () => {
   const [allWaves, setAllWaves] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
 
-  const contractAddress = "0x50C7A274324Fa69256D322b391e95a61A45296a4";
+  const contractAddress = "0x3Bc3A766fbf71700FA4e0389A6244e9936f624C7";
   const contractABI = abi.abi;
 
   const getAllWaves = async () => { 
@@ -104,7 +104,7 @@ const App = () => {
         console.log("Retrieved total wave count...", count.toNumber());
         
         // Execute the actual wave from your smart contract
-        const waveTxn = await wavePortalContract.wave(inputMessage);
+        const waveTxn = await wavePortalContract.wave(inputMessage, { gasLimit: 300000 });
         console.log("Mining...", waveTxn.hash);
 
         await waveTxn.wait();
